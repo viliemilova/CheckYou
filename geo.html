@@ -1,0 +1,54 @@
+<html>
+<title>География</title>
+<body style="background-color: yellow; font-size: 40">
+<button onclick="location.reload()">Нова игра</button><p id=0></p>
+<p id=1></p><img id=6 width=100 height=80>
+<p>
+<input id=5 style="font-size: 40" type="text" value="Отговори тук..." onfocus="this.select()">
+</p>
+<button id=2 style="font-size: 50" onclick=f1()>
+Отговори
+</button>
+
+<p id=3 style="font-size: 50">
+</p>
+<img id=4 width=100 height=100>
+<script>
+if(sessionStorage.getItem("points")==null) sessionStorage.setItem("points",0);
+var points=Number(sessionStorage.getItem("points"));
+document.getElementById("0").innerHTML="Точки: "+points;
+alert("Играта има две нива - 1 за лесно и 2 за трудно!");
+var level=prompt("Напиши ниво: 1 или 2");
+var countries=["Румъния","Унгария","Чехия","Сърбия","Австрия","Италия","Гърция","Турция","Белгия","Германия","Испания"];
+var capitals=["Букурещ","Будапеща","Прага","Белград","Виена","Рим","Атина","Анкара","Брюксел","Берлин","Мадрид"];
+var n=Math.floor(Math.random()*countries.length);
+var randCountry=countries[n];
+if(level==1)
+document.getElementById("1").innerHTML="Коя е столицата на "+randCountry+"?";
+else 
+document.getElementById("1").innerHTML="Коя е столицата на държавата с посочения флаг?"
+document.getElementById("6").src=n+".png";
+var ok=0;
+var f1=function()
+{
+   if(ok==1) return;
+   ok=1;
+   var ans=document.getElementById("5").value;
+   document.getElementById("3").innerHTML="Столицата на "+randCountry+" е "+capitals[n];
+   if(ans.toLowerCase()==capitals[n].toLowerCase()) 
+   {
+	document.getElementById("4").src="correct.png";
+	points++;
+	sessionStorage.setItem("points", points);
+	document.getElementById("0").innerHTML="Точки: "+points;
+   }
+   else document.getElementById("4").src="error.png";
+   document.getElementById("5").disabled=true;
+}
+
+
+
+
+</script>
+</body>
+</html>

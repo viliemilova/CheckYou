@@ -1,0 +1,101 @@
+<html>
+<title>Любопитно</title>
+<body style="background-color: lightblue; font-size: 30">
+<button onclick="location.reload()">Нова игра</button> <p id=0></p>
+<p style="text-align: center">Избери верен отговор</p>
+<p id=1></p>
+<input id=c5 type="radio" name="cap" value="">
+<label for=c5 id=l5></label><br>
+<input id=c6 type="radio" name="cap" value="">
+<label for=c6 id=l6></label><br>
+<input id=c7 type="radio" name="cap" value="">
+<label for=c7 id=l7></label><br>
+<input id=c8 type="radio" name="cap" value="">
+<label for=c8 id=l8></label><br>
+<button id=2 style="font-size: 30" onclick=f1()>Отговори</button>
+<p id=3></p>
+<img id=4 width=100 height=100>
+<script>
+if(sessionStorage.getItem("points")==null) sessionStorage.setItem("points",0);
+var points=Number(sessionStorage.getItem("points"));
+document.getElementById("0").innerHTML="Точки: "+points;
+var questions=["Коя планета е най-близо до Слънцето?",
+"Кое животно е най-бързо на сушата?",
+"Кой е най-големият океан на земята?",
+"Колко дни има високосната година?",
+"Колко секунди има в една минута?",
+"Кой орган помага за дишането?"];
+var ans1=["Меркурий","гепард","Тихи океан","366","60","бял дроб"];
+var ans2=["Венера","лъв","Атлантически океан","365","100","черен дроб"];
+var ans3=["Земя","кон","Йндийски океан","364","90","сърце"];
+var ans4=["Марс","куче","Северен ледовит океан","367","120","стомах"];
+var capitals=["Букурещ","Будапеща","Прага","Белград","Виена","Рим"];
+var n=Math.floor(Math.random()*questions.length);
+var randQ=questions[n];
+document.getElementById("1").innerHTML=randQ;
+var m=Math.floor(Math.random()*4+1);
+if(m==1)
+{
+   document.getElementById("l5").innerHTML=ans1[n];
+   document.getElementById("l6").innerHTML=ans2[n];
+   document.getElementById("l7").innerHTML=ans3[n];
+   document.getElementById("l8").innerHTML=ans4[n];
+   document.getElementById("c5").value=ans1[n];
+   document.getElementById("c6").value=ans2[n];
+   document.getElementById("c7").value=ans3[n];
+   document.getElementById("c8").value=ans4[n];
+}
+if(m==2)
+{
+   document.getElementById("l5").innerHTML=ans4[n];
+   document.getElementById("l6").innerHTML=ans1[n];
+   document.getElementById("l7").innerHTML=ans2[n];
+   document.getElementById("l8").innerHTML=ans3[n];
+   document.getElementById("c5").value=ans4[n];
+   document.getElementById("c6").value=ans1[n];
+   document.getElementById("c7").value=ans2[n];
+   document.getElementById("c8").value=ans3[n];
+}
+if(m==3)
+{
+   document.getElementById("l5").innerHTML=ans3[n];
+   document.getElementById("l6").innerHTML=ans4[n];
+   document.getElementById("l7").innerHTML=ans1[n];
+   document.getElementById("l8").innerHTML=ans2[n];
+   document.getElementById("c5").value=ans3[n];
+   document.getElementById("c6").value=ans4[n];
+   document.getElementById("c7").value=ans1[n];
+   document.getElementById("c8").value=ans2[n];
+}
+if(m==4)
+{
+   document.getElementById("l5").innerHTML=ans2[n];
+   document.getElementById("l6").innerHTML=ans3[n];
+   document.getElementById("l7").innerHTML=ans4[n];
+   document.getElementById("l8").innerHTML=ans1[n];
+   document.getElementById("c5").value=ans2[n];
+   document.getElementById("c6").value=ans3[n];
+   document.getElementById("c7").value=ans4[n];
+   document.getElementById("c8").value=ans1[n];
+}
+var f1=function()
+{
+   document.getElementById("c5").disabled=true;
+   document.getElementById("c6").disabled=true;
+   document.getElementById("c7").disabled=true;
+   document.getElementById("c8").disabled=true;
+   var ans=document.querySelector('input[name="cap"]:checked').value;
+   if(ans=="null") return;
+   document.getElementById("3").innerHTML="Верният отговор е: "+ans1[n];
+   if(ans==ans1[n]) 
+   {  
+	document.getElementById("4").src="correct.png"; 
+	points++;
+	sessionStorage.setItem("points", points);
+	document.getElementById("0").innerHTML="Точки: "+points;
+   }
+   else document.getElementById("4").src="error.png";
+}
+</script>
+</body>
+</html>
